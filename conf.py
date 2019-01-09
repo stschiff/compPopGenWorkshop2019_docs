@@ -39,7 +39,7 @@ release = ''
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.mathjax', 'recommonmark'
+    'sphinx.ext.mathjax'#, 'recommonmark'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -50,8 +50,7 @@ templates_path = ['_templates']
 #
 # source_suffix = ['.rst', '.md']
 source_suffix = {
-    '.rst': 'restructuredtext',
-    '.md': 'markdown',
+    '.rst': 'restructuredtext'#, '.md': 'markdown',
 }
 
 # The master toctree document.
