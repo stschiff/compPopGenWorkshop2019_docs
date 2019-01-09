@@ -40,7 +40,7 @@ The output of this command should look like this: ::
 
 (Use ``Ctrl-C`` to stop the command if it stalls.) The columns denote chromosome, position and the number of reads covering that site. We now need to write a little script that counts those read numbers for us, distinguishing autosomes, X chromosome and Y chromosome. Here is my version of this in ``awk``:
 
-.. code-block:: awk
+.. code-block:: bash
 
     BEGIN {
         xReads = 0
