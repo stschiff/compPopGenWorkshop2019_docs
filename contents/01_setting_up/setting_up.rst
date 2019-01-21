@@ -86,7 +86,13 @@ Let's learn some more commands. Above you have already used ``cat`` to output th
 
   try the command ``echo "Hello, how are you?"`` in your terminal.
 
-Another important command is ``grep``, which lets you filter out lines of a file that contain certain strings. As a basic example, first consider this 
+Another important command is ``grep``, which lets you filter out lines of a file that contain certain strings. As a basic example, consider this file listing genotyped individuals: ``/data/pca/genotypes_small.ind``. You can for example now list all French individuals via ``grep French /data/pca/genotypes_small.ind``.
+
+.. admonition:: Exercise
+
+  try the above listing of French individuals. Also try other population names, like "Polish" or "Lebanese". Instead of just ``grep``, try ``grep -c`` and see what that does (find out using ``man grep`` on a terminal.
+
+.. hint:: In bash, you can use tab-expansion. Instead of heaving to spell out ``/data/pca/genotypes_small.ind``, you can try typing ``/da<TAB>pca/geno<TAB>``.
 
 In general, in order to get help on any bash command, including the above, you can use ``man`` to review the documentation. For example, in a Terminal window, run ``man mkdir`` to view the documentation of the ``mkdir`` command. Use Space to move forward through the documentation, or the UP- and DOWN- keys. Use ``q`` to quit the view.
 
@@ -95,4 +101,75 @@ In general, in order to get help on any bash command, including the above, you c
 Pipes
 ^^^^^
 
-Pipes allow combining multiple bash commands into powerful so-called "Unix-Pipelines". 
+We will use Pipes in several places in this workshop. The basic idea is to combine multiple bash commands into powerful workflows. As an example, we'll use a simple bash pipeline to count the number of populations in our individual file. We need some new commands for that. First, let's look at the structure of the file at question. The command ``head /data/pca/genotypes_small.ind`` outputs::
+
+                 Yuk_009 M    Yukagir
+             Yuk_025 F    Yukagir
+             Yuk_022 F    Yukagir
+             Yuk_020 F    Yukagir
+               MC_40 M    Chukchi
+             Yuk_024 F    Yukagir
+             Yuk_023 F    Yukagir
+               MC_16 M    Chukchi
+               MC_15 F    Chukchi
+               MC_18 M    Chukchi
+
+So this file contains three columns, with variable numbers of leading whitespace in each row. For counting the number of populations, we need to first cut out the third column of this file. A useful command for this is the command ``awk {print $3}``, which you will learn more about later. Let's now build our first pipe. We will pipe the output of ``head /data/pca/genotypes_small.ind`` into ``awk {print $3}``, by running::
+
+    head /data/pca/genotypes_small.ind | awk '{print $3}'
+
+This means "Take the output of the first command, and pipe it into the input of the second command. The result is::
+
+    Yukagir
+    Yukagir
+    Yukagir
+    Yukagir
+    Chukchi
+    Yukagir
+    Yukagir
+    Chukchi
+    Chukchi
+    Chukchi
+
+OK, so now we have to sort these population names, and of course there is a command for that: ``sort``. 
+
+.. admonition:: Exercise
+
+    Build a pipeline that extracts the third column of the "ind" file and sorts it. Don't use ``head`` in the beginning, but pipe the entire file through the awk script. You already know which command outputs an entire file!
+
+.. hint:: Use ``head`` frequently to test pipelines, by putting it at the end of a pipeline and only look at the first 10 rows of your pipeline output. 
+
+OK, so finally, we need to remove duplicates from the sorted population names, and the appropriate command for that is the ``uniq`` command (which works only on sorted input). 
+
+.. admonition:: Exercise
+
+    Extend the pipeline from above to output unique population labels.
+    
+    
+The first ten rows of that pipeline output (verfiable with ``head``) should read::
+
+    Abkhasian
+    Adygei
+    Albanian
+    Aleut
+    Aleut_Tlingit
+    Altaian
+    Ami
+    Armenian
+    Atayal
+    Balkar
+
+The final step is to count the lines. The command for that is ``wc -l``, which counts the lines from its input.
+
+.. admonition:: Exercise
+
+     Extend the pipeline one last time, by piping the output into ``wc -l``.
+
+Back to Notebooks
+-----------------
+
+.. admonition:: Exercise
+
+     You should now try to implement the step-by-step build up of that pipeline in a bash notebook. You can find my own example `here <>`.
+
+

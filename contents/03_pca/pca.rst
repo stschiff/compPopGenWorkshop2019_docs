@@ -31,7 +31,7 @@ The data is laid out as a matrix, with columns indicating individuals, and rows 
 
 .. admonition:: Exercise
 
-  Confirm that there are 1,351 individuals in the dataset. (Advanced) Count how many different populations there are. Hint: You can use the Unix tools ``awk '{print $3}'``, ``sort`` and ``uniq -c`` to achieve that (see solutions notebook ``bash_commands``).
+  Confirm that there are 1,351 individuals in the dataset. (Advanced) Count how many individuals per population there are. Hint: You can use the Unix tools ``awk '{print $3}'``, ``sort`` and ``uniq -c`` to achieve that (see solutions notebook ``bash_commands``).
 
 How PCA works
 -------------
