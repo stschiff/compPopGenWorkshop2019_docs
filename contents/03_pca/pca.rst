@@ -234,3 +234,5 @@ You can carry out similar commands to plot the All Eurasia case, which should lo
     :width: 500px
     :height: 300px
     :align: center
+
+You can fine the solution notebook `here <https://nbviewer.jupyter.org/github/stschiff/compPopGenWorkshop2019_docs/blob/master/solution_notebooks/python_pca.ipynb>`__.
