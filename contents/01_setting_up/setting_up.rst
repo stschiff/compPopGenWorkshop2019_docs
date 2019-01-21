@@ -170,6 +170,7 @@ Back to Notebooks
 
 .. admonition:: Exercise
 
-     You should now try to implement the step-by-step build up of that pipeline in a bash notebook. You can find my own example `here <>`.
+     You should now try to implement the step-by-step build up of that pipeline in a bash notebook. You can find my own example `here <https://nbviewer.jupyter.org/github/stschiff/compPopGenWorkshop2019_docs/blob/master/solution_notebooks/setting_up_bash.ipynb>`_.
+     
 
 
