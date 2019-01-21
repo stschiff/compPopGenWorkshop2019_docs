@@ -1,7 +1,9 @@
 Notes on Infrastructure
 =======================
 
-The practical exercises of this workshop will be running on a separate virtual machine (VM) for each participant. Access to this virtual machine can be obtained using various channels, including a custom terminal client software (such as Terminal on Mac OS X) and Jupyter_, a browser based system for interactive computing. For the following, I will assume access via Jupyter.
+For the practical sessions and exercises of this workshop, we have set up a Cloud Server with 32 CPUs and 64Gb of Memory in total (Provider: GWDG_) with a separate user account for each participant. You will have received your . Access to this virtual machine can be obtained using various channels, including a custom terminal client software (such as Terminal on Mac OS X) and Jupyter_, a browser based system for interactive computing. For the following, I will assume access via Jupyter.
+
+.. _GWDG: https://www.gwdg.de
 
 How to Connect to Jupyter
 -------------------------
