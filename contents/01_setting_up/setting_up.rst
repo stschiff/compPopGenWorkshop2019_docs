@@ -10,7 +10,7 @@ For the practical sessions and exercises of this workshop, we have set up a Clou
 
 .. _https://c107-224.cloud.gwdg.de/hub/login: https://c107-224.cloud.gwdg.de/hub/login
 
-where you can enter your username and password and are then logged into Jupyter. For reference, you find documentation for the Jupyter interface `here <https://jupyter.org/documentation>`_
+where you can enter your username and password and are then logged into Jupyter. For reference, you find documentation for the Jupyter interface `here <https://jupyter.org/documentation>`__
 
 More expert users can also access the server via custom terminal client software (such as ``Terminal`` on Mac OS X, or ``putty`` on Windows), via::
 
@@ -170,7 +170,7 @@ Back to Notebooks
 
 .. admonition:: Exercise
 
-     You should now try to implement the step-by-step build up of that pipeline in a bash notebook. You can find my own example `here <https://nbviewer.jupyter.org/github/stschiff/compPopGenWorkshop2019_docs/blob/master/solution_notebooks/setting_up_bash.ipynb>`_.
+     You should now try to implement the step-by-step build up of that pipeline in a bash notebook. You can find my own example `here <https://nbviewer.jupyter.org/github/stschiff/compPopGenWorkshop2019_docs/blob/master/solution_notebooks/setting_up_bash.ipynb>`__.
      
 
 

@@ -39,7 +39,7 @@ The data is laid out as a matrix, with columns indicating individuals, and rows 
 
    Count how many individuals per population there are. Hint: You can use the Unix tools ``awk '{print $3}'``, ``sort`` and ``uniq -c`` to achieve that.
 
-You can find my solution notebook to these exercises `here <>`_
+You can find my solution notebook to these exercises `here <https://nbviewer.jupyter.org/github/stschiff/compPopGenWorkshop2019_docs/blob/master/solution_notebooks/exploring_genotypes.ipynb>`_
 
 How PCA works
 -------------
@@ -88,9 +88,9 @@ Running smartPCA
 
 Now go ahead and prepare a parameter file according to the layout described above.
 
-.. hint:: Put all filenames with their absolute path into the parameter file. To prepare the parameter file, you can use the so-called "Heredoc" syntax in bash, if you are familiar with it (as done in the solution notebook ``bash_commands``). Alternatively, you can use the Jupyter file editor to create the parameter file.
+.. hint:: Put all filenames with their absolute path into the parameter file. To prepare the parameter file, you can use the so-called "Heredoc" syntax in bash, if you are familiar with it (see also solution notebook below). Alternatively, you can use the Jupyter file editor to create the parameter file.
 
-... and run smartPCA using the command ``smartpca -p <PARAMS_FILE>``
+... and run smartPCA using the command ``smartpca -p PARAMS_FILE > smartpca.log``. Here, I'm using bash redirection of the log output of ``smartpca`` into a log file called ``smartpca.log``, which may be useful for trouble shooting.
 
 .. admonition:: Exercise
 
@@ -98,25 +98,27 @@ Now go ahead and prepare a parameter file according to the layout described abov
   
 .. note:: Running ``smartPCA`` with this dataset takes between 15 and 30 minutes.
 
-.. hint:: ``smartpca`` outputs a flurry of log messages that may be useful later. If you run the program within a Jupyter Notebook, you can always go back later and view the log, as it is saved within the notebook. If you choose to run it through a terminal, you should direct the output into a file, e.g. like this ``smartpca -p PARAMS_FILE > output.log``.
-
-To facilitate further processing, I have put the results file into ``~/share/pca_results/pca.WestEurasia.*`` and ``~/share/pca_results/pca.AllEurasia.*``
+To facilitate further processing, I have put the results file into ``/data/pca/results/pca.WestEurasia.*`` and ``/data/pca/results/pca.AllEurasia.*``
 
 Plotting modern populations
 ---------------------------
 
-There are several ways to make nice publication-quality plots (Excel is usually not one of them). Popular tools include R_ and matplotlib_ . Both frameworks can be used within the Jupyter Notebook Python3 interface, and here I opted for matplotlib.
+There are several ways to make nice publication-quality plots (Excel is usually not one of them). Popular tools include R_ and matplotlib_ . Both frameworks can be used within the Jupyter Notebook interface, and here I opted for matplotlib.
 
 .. _R: https://www.r-project.org>
 .. _matplotlib: http://matplotlib.org
 
-I suggest that you start a new Jupyter Notebook with the Python3 language, and load a couple of essential libraries in the first code cell::
+I suggest that you start a new Jupyter Python Notebook, and load a couple of essential libraries in the first code cell::
 
   %matplotlib inline
   import pandas as pd
   import matplotlib.pyplot as plt
 
-Let's have a look at the main results file from ``smartpca``, the ``*.evec`` file, for example by going to the terminal and running ``head EVEC_FILE``, where ``EVEC_FILE`` should obviously replaced with the actual filename of the PCA run. You should find something like::
+Let's have a look at the main results file from ``smartpca``, the ``*.evec`` file, for example by running this simple bash command in the notebook using ``!head EVEC_FILE``, where ``EVEC_FILE`` should obviously replaced with the actual filename of the PCA run.
+
+.. hint:: You can run any bash command in a python notebook by preceding it with the ``!`` sign. This comes in very handy at times!
+
+You should find something like::
 
            #eigvals:     6.289     3.095     2.693     2.010
                 I001    -0.0192      0.0353     -0.0024     -0.0084     Ignore_Iran_Zoroastrian(PCA_outlier)
@@ -134,7 +136,7 @@ The first row contains the eigenvalues for the first 4 principal components (PCs
 
 .. admonition:: Exercise
 
-  Load one of the two PCA results files with ending ``*.evec``. You need to skip the first row and name the columns manually. Use "Name", "PC1", ... "PC4", "Population" for the column names. Google documentation for ``read_csv()`` to ensure that tabs and spaces are considered field delimiters, that the first row is skipped, and that the column names are correctly entered. Please see the ``02_pca_python`` solution notebook if you need help. You should now have the pca data loaded into a dataframe.
+  Load one of the two PCA results files with ending ``*.evec``. You need to skip the first row and name the columns manually. Use "Name", "PC1", ... "PC4", "Population" for the column names. Google documentation for ``read_csv()`` to ensure that tabs and spaces are considered field delimiters, that the first row is skipped, and that the column names are correctly entered. 
 
 You should now have a pandas dataframe which looks like this::
 
@@ -170,7 +172,7 @@ This sequence of commands gives us:
    :height: 500px
    :align: center
 
-OK, but how do we systematically show all the populations? There are too many of those to separate them all by different colors, or by different symbols, so we need to combine colours and symbols and use all the combinations of them to show all the populations. To do that, we first need to load the population list that we want to focus on for now, which are the same lists as used above for running the PCA. In case of the West Eurasian PCA, you can load the file using ``pd.read_csv("~/share/WestEurasia.poplist.txt", names=["Population"]).sort_values(by="Population")``. Next, we need to associate a color number and a symbol number with each population. To keep things simple, I would recommend to simply cycle through all combinations automatically. This code snippet looks a bit magic, but it does the job::
+OK, but how do we systematically show all the populations? There are too many of those to separate them all by different colors, or by different symbols, so we need to combine colours and symbols and use all the combinations of them to show all the populations. To do that, we first need to load the population list that we want to focus on for now, which are the same lists as used above for running the PCA. In case of the West Eurasian PCA, you can load the file using ``pd.read_csv("/data/pca/WestEurasia.poplist.txt", names=["Population"]).sort_values(by="Population")``. Next, we need to associate a color number and a symbol number with each population. To keep things simple, I would recommend to simply cycle through all combinations automatically. This code snippet looks a bit magic, but it does the job::
 
   nPops = len(popListDat)
   nCols = 8
