@@ -71,6 +71,9 @@ Working with Bash
 
 Bash denotes both a scripting language and the interactive system that is used with Terminals (and Bash notebooks). In the following, we will learn some basic use cases and commands.
 
+Simple commands
+^^^^^^^^^^^^^^^
+
 The most important commands in a Unix shell are ``ls``, ``cd`` and ``mkdir``. In general, all commands in a Unix shell are entered by typing the command and then typing ENTER.
 
 .. admonition:: Exercise
@@ -83,3 +86,13 @@ Let's learn some more commands. Above you have already used ``cat`` to output th
 
   try the command ``echo "Hello, how are you?"`` in your terminal.
 
+Another important command is ``grep``, which lets you filter out lines of a file that contain certain strings. As a basic example, first consider this 
+
+In general, in order to get help on any bash command, including the above, you can use ``man`` to review the documentation. For example, in a Terminal window, run ``man mkdir`` to view the documentation of the ``mkdir`` command. Use Space to move forward through the documentation, or the UP- and DOWN- keys. Use ``q`` to quit the view.
+
+.. warning:: Use ``man <COMMAND>`` only in the Terminal, not in a bash-notebook!
+
+Pipes
+^^^^^
+
+Pipes allow combining multiple bash commands into powerful so-called "Unix-Pipelines". 
