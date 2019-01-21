@@ -152,6 +152,7 @@ Calculating coverage with samtools
 Example:
 
 .. code-block:: bash
+
     samtools depth /data/bam/workshop1.bam | less
 
 .. admonition:: Exercise
