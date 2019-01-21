@@ -5,14 +5,10 @@ Principal Components Analysis (PCA)
 
 Principal components analysis (PCA) is one of the most useful techniques to visualise genetic diversity in a dataset. The methodology is not restricted to genetic data, but in general allows breaking down high-dimensional datasets to two or more dimensions for visualisation in a two-dimensional space.
 
-.. hint:: You can find the solution notebooks for all exercises in this and subsequent sessions here_
-
-.. _here: https://github.com/stschiff/compvar-workshop-docs/tree/master/supp
-
 Genotype Data
 -------------
 
-This lesson is also our first contact with the genotype data used in this and most of the following lessons. The dataset that we will work with contains 3,902 individuals, each represented by 593,124 single nucleotide polymorphisms (SNPs). Those SNPs have exactly two different alleles, and each individual has one of four possible values at each genotype: homozygous reference, heterozygous, homozygous alternative, or missing. Those four values are encoded 2, 1, 0 and 9 respectively. 
+This lesson is also our first contact with the genotype data used in this and most of the following lessons. The dataset that we will work with contains 1,340 individuals, each represented by 593,124 single nucleotide polymorphisms (SNPs). Those SNPs have exactly two different alleles, and each individual has one of four possible values at each genotype: homozygous reference, heterozygous, homozygous alternative, or missing. Those four values are encoded 2, 1, 0 and 9 respectively. 
 
 The data is laid out as a matrix, with columns indicating individuals, and rows indicating SNPs. The data itself comes in the so-called "EIGENSTRAT" format, which is defined in the `Eigensoft package`_ used by many tools used in this workshop. In this format, a genotype dataset consists of three files, usually with the following file endings:
 
@@ -27,11 +23,23 @@ The data is laid out as a matrix, with columns indicating individuals, and rows 
 
 .. admonition:: Exercise
 
-  Explore the three files used in the workshop. They are located unser ``~/share/genotype_data``. You can use the bash terminal, and use ``less -S <FILENAME>`` to view each file and skim through it to get a feeling for the data. Alternatively, you can create use a Bash notebook, use ``cd`` as above, and then use the unix tools ``head`` in combination with ``cut`` to show portions of the files (see solutions notebook ``bash_commands``).
+  Explore the three files used in the workshop using the terminal. They are located unser ``/data/pca/genotypes_small.*``. Use the bash terminal, and use ``less -S <FILENAME>`` to view each file and skim through it to get a feeling for the data.
 
 .. admonition:: Exercise
 
-  Confirm that there are 1,351 individuals in the dataset. (Advanced) Count how many individuals per population there are. Hint: You can use the Unix tools ``awk '{print $3}'``, ``sort`` and ``uniq -c`` to achieve that (see solutions notebook ``bash_commands``).
+  Start a new bash notebook and look at the first 20 rows of both the ``ind`` and the ``snp`` file using ``head -20``. For the ``geno`` file, restrict to the first 100 columns using ``cut -c 1-100``, which you can also use in a pipe together with ``head -20``.
+
+.. admonition:: Exercise
+
+  Confirm that there are 1,340 individuals in the dataset. Confirm that this number equals the number of rows in the ``ind`` file, and the number of columns in the ``geno`` file..
+
+.. hint:: You can use ``head -1`` to restrict to the first line of a file, and ``wc -c`` to count the number of characters (i.e. columns) in that file.
+
+.. admonition:: Exercise
+
+   Count how many individuals per population there are. Hint: You can use the Unix tools ``awk '{print $3}'``, ``sort`` and ``uniq -c`` to achieve that.
+
+You can find my solution notebook to these exercises `here <>`_
 
 How PCA works
 -------------
@@ -66,19 +74,19 @@ So what happens to individuals that are not in populations listed in the populat
 
 For this workshop, I prepared two population lists::
 
-  /home/training/share/WestEurasia.poplist.txt
-  /home/training/share/AllEurasia.poplist.txt
+  /data/pca/WestEurasia.poplist.txt
+  /data/pca/AllEurasia.poplist.txt
 
 As you can tell from the names of the files, they specify two sets of modern populations representing West Eurasia or all of Europe and Asia, respectively.
 
 .. admonition:: Exercise
 
-  Look through both of the population lists and google any population name that you don't recognise to get a feeling for the ethnic groups represented here.
+  Look through both of the population lists and google some population names that you don't recognise to get a feeling for the ethnic groups represented here.
 
 Running smartPCA
 ----------------
 
-Now go ahead and prepare a parameter file according to the layout described above...
+Now go ahead and prepare a parameter file according to the layout described above.
 
 .. hint:: Put all filenames with their absolute path into the parameter file. To prepare the parameter file, you can use the so-called "Heredoc" syntax in bash, if you are familiar with it (as done in the solution notebook ``bash_commands``). Alternatively, you can use the Jupyter file editor to create the parameter file.
 
