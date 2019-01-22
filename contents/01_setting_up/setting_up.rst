@@ -41,7 +41,7 @@ Notebook can be loaded for different underlying kernels: bash, python and R. Not
 
 .. admonition:: Exercise
 
-  Create a new bash notebook. Then select in the dropdown list above "Markdown". Type ``# Bash Exercises`` into the cell, press Shift-Enter and watch. Then type ``This is text with \*italic\* and \*\*bold\*\* letters``. Then again type Shift-ENTER and watch.
+  Create a new bash notebook. Then select in the dropdown list above "Markdown". Type ``# Bash Exercises`` into the cell, press Shift-Enter and watch. Then type ``This is text with *italic* and **bold** letters``. Then again type Shift-ENTER and watch.
   
 .. hint::
    
