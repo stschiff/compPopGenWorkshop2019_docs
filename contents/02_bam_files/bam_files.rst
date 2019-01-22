@@ -182,3 +182,5 @@ http://www.internationalgenome.org/wiki/Analysis/vcf4.0/
 
    Run the above command on workshop1.bam using the reference genome /data/bam/whole_genome.fa. Have a look at the output and see how many differences you observe to the human reference. 
 
+
+The solution notebook for this session is `here <https://nbviewer.jupyter.org/github/stschiff/compPopGenWorkshop2019_docs/blob/master/solution_notebooks/bam_files.ipynb>`__
