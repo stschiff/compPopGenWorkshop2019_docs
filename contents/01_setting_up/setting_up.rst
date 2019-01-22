@@ -264,3 +264,5 @@ which gives this final plot:
    :width: 500px
    :height: 300px
    :align: center
+
+You can find a solution notebook for this part `here <https://nbviewer.jupyter.org/github/stschiff/compPopGenWorkshop2019_docs/blob/master/solution_notebooks/plotting_popfreqs.ipynb>`__.
