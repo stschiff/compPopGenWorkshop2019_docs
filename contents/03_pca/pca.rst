@@ -96,7 +96,7 @@ Now go ahead and prepare a parameter file according to the layout described abov
 
   Run ``smartpca`` with the prepared parameter file.
   
-.. note:: Running ``smartPCA`` with this dataset takes between 15 and 30 minutes.
+.. note:: Running ``smartPCA`` with this dataset and on a single CPU takes between 30 and 60 minutes.
 
 To facilitate further processing, I have put the results file into ``/data/pca/results/pca.WestEurasia.*`` and ``/data/pca/results/pca.AllEurasia.*``
 
