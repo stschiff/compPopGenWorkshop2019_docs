@@ -165,6 +165,12 @@ The final step is to count the lines. The command for that is ``wc -l``, which c
 
      Extend the pipeline one last time, by piping the output into ``wc -l``.
 
+We can now do one final step and augment the pipeline we have built to output not only the total number of populations, but also the number of individuals per population. The trick here is to use the ``uniq -c`` command, instead of just ``uniq``. That will output the unique population labels alongside the number of times it is seen. The final pipeline then reads::
+
+    cat /data/pca/genotypes_small.ind | awk '{print $3}' | sort | uniq -c
+
+You can run this and store the result in a file, using standard redirection. This is achieved via the operator ``> FILENAME``. So for example, you can extend the above pipeline with ``> population_frequencies.txt`` to output the result in a file called ``population_frequencies.txt``.
+
 Back to Notebooks
 -----------------
 
@@ -173,4 +179,88 @@ Back to Notebooks
      You should now try to implement the step-by-step build up of that pipeline in a bash notebook. You can find my own example `here <https://nbviewer.jupyter.org/github/stschiff/compPopGenWorkshop2019_docs/blob/master/solution_notebooks/setting_up_bash.ipynb>`__.
      
 
+Some Plotting with Python
+-------------------------
 
+As a final exercise, we now want to plot the population frequencies. As a first step, we again open a python notebook and include the already known boilerplate in a code cell::
+
+    %matplotlib inline
+    import matplotlib.pyplot as plt
+
+In addition, we need to load the pandas_ library::
+
+  import pandas as pd
+ 
+We can now load the ``population_frequencies.txt`` (or however you have called it) into python, using pandas ``read_csv`` function. 
+
+.. admonition:: Exercise
+
+    Look up some documentation for the ``read_csv()`` function, by typing in a python notebook ``?pd.read_csv``. This should open a little extra window with help information. For reading the population frequencies, you will need options ``delim_whitespace`` and ``names``. Look them up.
+
+You can now load in the data, using the command::
+
+    dat = pd.read_csv(FILENAME, delim_whitespace=True, names=["nr", "pop"])
+
+.. admonition:: Exercise
+
+    Execute the above command using the correct filename (make sure you specify the correct path and directory to it, if the file is not in the same directory as your notebook).
+
+
+.. note:: The column names, here "nr" and "pop" are arbitrary and just denote the names for the two columns in the file.
+
+You can verify that loading this data has succeeded by just typing ``dat`` into a new code cell and checking that it outputs a nicely formatted dataframe with two columns and an index.
+
+We can now go ahead and plot this. As a first step, we can just try the simplest way of plotting::
+
+   plt.plot(dat["nr])
+
+which should yield something like this:
+
+.. image:: unsortedPopFreqs.png
+   :width: 500px
+   :height: 300px
+   :align: center
+
+Now this already shows that the majority of populations has something like 10 individuals, but we would like to also display the population labels, and sort the values. As first step, we first create a sorted version of this dataframe using the following command::
+
+    dat_sorted = dat.sort_values(by="nr")
+
+.. admonition:: Exercise
+   
+   Look up the ``sort_values`` method with ``?dat.sort_values`` and see what it does and what the ``by=`` option does.
+
+We can now make a sorted plot. For that we actually need two arguments to ``plt.plot``, one for specifying the x coordinate of each point, and one for the y coordinate for each point (before we didn't need that because ``plt.plot`` assumes a default x value if none is given, which is the index in the dataframe. Now this got resorted, so we have to spcify it). Here is the command::
+
+   x = range(len(dat_sorted))
+   y = dat_sorted["nr"]
+   plt.plot(x, y)
+
+Here, the ``range(len(dat_sorted))`` just produces an array which looks like ``[0, 1, 2, 3, 4, ...``, so it simply creates a list from 1 to the number of populations minus one. This command produces a sorted version of the previous plot:
+
+.. image:: sortedPopFreqs.png
+   :width: 500px
+   :height: 300px
+   :align: center
+
+OK, so now the final step is to add the labels. We of course have the labels already in our dataframe, under the "pop" column. The function that adds labels is the ``plt.xticks`` function.
+
+.. admonition:: Exercise
+
+    Look up the documentation for the ``plt.xticks`` function, similarly as in the previous exercise.
+
+For the final plot, we now put this together, and we also increase the figure size a bit to accommodate all the population labels. Together we have::
+
+    dat_sorted = dat.sort_values(by="nr")
+    y = dat_sorted["nr"]
+    x = range(len(y))
+    xticks = dat_sorted["pop"]
+    plt.figure(figsize=(20,8))
+    plt.plot(x, y)
+    plt.xticks(x, xticks, rotation="vertical");
+
+which gives this final plot:
+
+.. image:: sortedAndLabeledPopFreqs.png
+   :width: 500px
+   :height: 300px
+   :align: center
