@@ -27,6 +27,8 @@ I prepared two files that you can try these commands on::
 
    Run ``samtools tview`` on workshop2.bam and use space to scroll until you see an alignment. Try ``?`` to see further options.
 
+.. hint:: If you want to find a position with lots of data, check out ``samtools tview -p 17:6944949 /data/bam/workshop1.bam``. You can also add the reference genome, which will render the reads differently: ``samtools tview -p 17:6944949 /data/bam/workshop1.bam --reference /data/bam/whole_genome.fa``
+
 .. admonition:: Exercise
 
    Run ``samtools view workshop1.bam | less``. What chromosome do the first couple of sequences align to? How does the output change if you use ``-h`` which adds the SAM header information?
