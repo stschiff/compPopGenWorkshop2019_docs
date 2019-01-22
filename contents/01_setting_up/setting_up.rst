@@ -190,6 +190,8 @@ As a final exercise, we now want to plot the population frequencies. As a first 
 In addition, we need to load the pandas_ library::
 
   import pandas as pd
+
+.. _pandas: https://pandas.pydata.org
  
 We can now load the ``population_frequencies.txt`` (or however you have called it) into python, using pandas ``read_csv`` function. 
 
