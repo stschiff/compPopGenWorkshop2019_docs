@@ -21,10 +21,10 @@ This is the documentation for the Workshop held during January 22-24, 2019 at th
    contents/01_setting_up/setting_up
    contents/02_bam_files/bam_files
    contents/03_pca/pca
-   contents/04_fstats/fstats.md
+   contents/04_fstats/fstats
    contents/05_qpwave_qpadm/qpwave_qpadm
    contents/06_alder/alder
-   contents/07_qpgraph/qpgraph
+   contents/07_qpgraph/qpGraph.md
    contents/08_msmc/msmc
 
 
