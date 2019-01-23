@@ -1,30 +1,30 @@
 # Estimating Admixture Graphs with _qpGraph_
 
-Based on previous analyses we can try to reconstruct a model that includes the described observations in an admixture graph, which combines in an unique model multiple groups that can be single individuals or larger populations. For that we are going to use _qpGraph_ (also known as ADMIXTUREGRAPH) part of the package ADMIXTOOLS [Patterson et al. 2012](http://www.genetics.org/content/192/3/1065.short). _qpGraph_ relies on an user-defined topology of the admixture graph and calculates the best-fitting admixture proportions and branch lengths based on the observed f-statistics. 
-
-As reported in the Method section of [Lipson and Reich 2017](https://academic.oup.com/mbe/article/34/4/889/2838774): “Our usual strategy for building a model in ADMIXTUREGRAPH is to start with a small, well-understood subgraph and then add populations (either unadmixed or admixed) one at a time in their best-fitting positions. This involves trying different branch points for the new population and comparing the results. If a population is unadmixed, then if it is placed in the wrong position, the fit of the model will be poorer, and the inferred split point will move as far as it can in the correct direction, constrained only by the specified topology. Thus, searching over possible branching orders allows us to find a (locally) optimal topology. If no placement provides a good fit (in the sense that the residual errors are large), then we infer the presence of an admixture event, in which case we test for the best-fitting split points of the two ancestry components. After a new population is added, the topology relating the existing populations can change, so we examine the full model fit and any inferred zero-length internal branches for possible local optimizations.”
+Based on previous analyses we can try to reconstruct a model that includes the described observations in an admixture graph, which combines in an unique model the relationships between multiple groups that can be single individuals or larger populations. For that we are going to use _qpGraph_ (also known as ADMIXTUREGRAPH) part of the package ADMIXTOOLS [Patterson et al. 2012](http://www.genetics.org/content/192/3/1065.short). _qpGraph_ relies on an user-defined topology of the admixture graph and calculates the best-fitting admixture proportions and branch lengths based on the observed f-statistics. 
 ## Overview method
 
 The general approach of an admixture graph is to reconstruct the genetic relationships between different groups through a phylogenetic tree allowing for the addition of admixture events. The method operates on a defined graph’s topology and estimates f2, f3, and f4-statistic values for all pairs, triples, and quadruples of groups, compared to the expected allele frequency correlation of the tested groups. For a given topology, _qpGraph_ provides branch lengths (in units of genetic drift) and mixture proportions. Groups that share a more recent common ancestor will covary more than others in their allele frequencies due to common genetic drift. We should keep in mind that the model is based on an unrooted tree and that while we show graphs with a selected outgroup as the root, the results should not depend on the root position.
 
 > Note: The reconstructed graph is never meant to reflect a comprehensive population history of the region under study but the best fitted model to the limit of the available groups and method’s resolution.
 
+As reported in the Method section of [Lipson and Reich 2017](https://academic.oup.com/mbe/article/34/4/889/2838774): “Our usual strategy for building a model in ADMIXTUREGRAPH is to start with a small, well-understood subgraph and then add populations (either unadmixed or admixed) one at a time in their best-fitting positions. This involves trying different branch points for the new population and comparing the results. If a population is unadmixed, then if it is placed in the wrong position, the fit of the model will be poorer, and the inferred split point will move as far as it can in the correct direction, constrained only by the specified topology. Thus, searching over possible branching orders allows us to find a (locally) optimal topology. If no placement provides a good fit (in the sense that the residual errors are large), then we infer the presence of an admixture event, in which case we test for the best-fitting split points of the two ancestry components. After a new population is added, the topology relating the existing populations can change, so we examine the full model fit and any inferred zero-length internal branches for possible local optimizations.”
+
 ## Data
 
-For this lesson, we are going to use modern and ancient DNA data analysed in the recently published study about the settlement of the Americas [Posth et al. 2018](https://www.sciencedirect.com/science/article/pii/S0092867418313801)
+For this session, we are going to use modern and ancient DNA data analysed in the recently published study about the settlement of the Americas [Posth et al. 2018](https://www.sciencedirect.com/science/article/pii/S0092867418313801)
 
 The genotype data is in `EIGENSTRAT` format and exclude from the `1240K panel` a subset of SNPs that are transitions in CpG sites. Those Cytosines are prone to be methylated and if deamination (the typical chemical modification of ancient DNA) occurs at the same position Cytosine is directly converted into Thymine without becoming Uracil. Thus, the resulting CtoT modification cannot be removed with an enzymatic reaction like performing uracil-DNA glycosylase (UDG) treatment. This results in additional noise in ancient DNA data that can be reduced by excluding those SNPs. This is especially relevant when analysing ancient samples that have been processed using different laboratory protocols.
 
 The path to the data we are going to work on is the following:
 
-  /data/qpGraph/Posth2018_Americas.packedancestrymapgeno
-  /data/qpGraph/Posth2018_Americas.ind
-  /data/qpGraph/Posth2018_Americas.snp
+    /data/qpGraph/Posth2018_Americas.packedancestrymapgeno
+    /data/qpGraph/Posth2018_Americas.ind
+    /data/qpGraph/Posth2018_Americas.snp
 
 
 ## Preparing the parameter file 
 
-In order to run _qpGraph_ we need to prepare a parameter file that we can call `parQpgraph` and where we change <filename> with the names above.
+In order to run _qpGraph_ we need to prepare a parameter file that we can call `parQpgraph` and where we change `filename` with the names above.
 
     DIR: /data/qpGraph
     genotypename: DIR/<filename>.packedancestrymapgeno
@@ -41,12 +41,12 @@ In order to run _qpGraph_ we need to prepare a parameter file that we can call `
     lambdascale: 1
 
 
-Let’s go through the most relevant parameter options. `outpop: NULL` does not use an outgroup population to normalize f-stats by heterozygosity e.g. selecting a group in the graph in which SNPs must be polymorphic. `useallsnps: YES` each comparison uses all SNPs overlapping in that specific test, otherwise the program looks only at the overlapping SNPs between all groups. `blgsize: 0.05` is the block size in Morgans for Jackknife. `diag:  .0001` uses the entire matrix form of the objective function to avoid the basis dependence of the least-squares version of the computation. `lambdascale: 1` in order to preserve the standard scaling of the f-statistics without an extra denominator.
+Let’s go through the most relevant parameter options. `outpop: NULL` does not use an outgroup population to normalize f-stats by heterozygosity e.g. selecting a group in the graph in which SNPs must be polymorphic. `useallsnps: YES` each comparison uses all SNPs overlapping in that specific test, otherwise the program looks only at the overlapping SNPs between all groups. `blgsize: 0.05` is the block size in Morgans for Jackknife. `diag:  .0001` uses the entire matrix form of the objective function to avoid the basis dependence of the least-squares version of the computation. `lambdascale: 1` in order to preserve the standard scaling of the f-statistics without an extra denominator. `lsqmode: YES` otherwise unstable for large graphs. `hires: YES` controls output when more decimals are desired.
 
 
-## Preparing the tree topology
+## Preparing the graph topology
 
-We start by constructing a scaffold tree based on previously published studies (Lipson et al. 2017, Moreno-Mayar et al. 2018 and Scheib et al. 2018). The following can be saved in a file called `Figure3a`.
+We start by constructing a scaffold graph based on previously published studies (Lipson et al. 2017, Moreno-Mayar et al. 2018 and Scheib et al. 2018). The following can be saved in a file called `Figure3a`.
 
     root    R
     label    Mbuti.DG    Mbuti.DG
@@ -107,7 +107,7 @@ First let’s inspect the `.out` file. If we open that on the terminal with `les
     snps: 681581  indivs: 36
     lambdascale:     1.000
 
-At the very bottom of the `.out` file are reported the outlier f4-statistics, which show the lowest or highest Z-scores. Those are calculated based on the difference between the fitted and the observed f4 values. The only worst f4-statistic identified model we just run is some un-modelled affinity between `USA_SanNicolas_4900BP` and `USR1` that is anyway below 3 standard deviations.
+At the very bottom of the `.out` file are reported the outlier f4-statistics, which show the lowest or highest Z-scores. Those are calculated based on the difference between the fitted and the observed f4 values. The only worst f4-statistic identified in the model we just run is some un-modelled affinity between `USA_SanNicolas_4900BP` and `USR1` that is anyway below 3 standard deviations.
 
     outliers:
                                                           Fit          Obs         Diff   Std. error         Z 
@@ -145,9 +145,9 @@ The worst f4-statistic is -2.809 and despite in the `.dot` file once converted i
 
 Now we can create a file called `Figure3c` where we add the last three group **labels** `Brazil_LapaDoSanto_9600BP, Argentina_ArroyoSeco2_7700BP, Chile_LosRieles_5100BP`. From node `SA` add an **edge** to form a new node called `SA3` that splits into `Brazil_LapaDoSanto_9600BP` and a new node `SA4`. Finally `SA4` splits itself into the two Southern Cone populations that are `Argentina_ArroyoSeco2_7700BP` and `Chile_LosRieles_5100BP`. After running it we can visualise the resulting `.dot` file as a .png. That is the final graph reported in Figure 3 of Posth et al. 2018!
 
-## Test the robustness of the tree topology
+## Test the robustness of the graph topology
 
-Starting from the final tree `Figure3c` we can try, for example, to invert `Belize_MayahakCabPek_9300BP` with `USA_SanNicolas_4900BP` in a file called `Figure3c.v2` to test for branching patterns between North and Central American groups. For more advanced modelling we can instead invert the entire `SA3` node  with `Belize_MayahakCabPek_9300BP` and call the file `Figure3c.v3` to test for Central-South America branching patterns.
+Starting from the final graph `Figure3c` we can try, for example, to invert `Belize_MayahakCabPek_9300BP` with `USA_SanNicolas_4900BP` in a file called `Figure3c.v2` to test for branching patterns between North and Central American groups. For more advanced modelling we can instead invert the entire `SA3` node  with `Belize_MayahakCabPek_9300BP` and call the file `Figure3c.v3` to test for Central-South America branching patterns.
 
 > Questions: What do you observe when inspecting the respective `.out` files? Which of the models fit and which not? How do you interpret that?
 
@@ -210,7 +210,7 @@ At the bottom of the newly produced `.out` file there are several f4-statistics 
 
     worst f-stat:       Han        Chi        Bra        CHI       0.000000     0.003372     0.003372     0.000862     3.912 
 
-We can then model a contribution from the oldest Chilean individual into the younger one. Change the last part of `FigureS5a` with the following edges and one **admixture event**, save it as `FigureS5a.v2` and run it again.
+We can then model a contribution from the oldest Chilean individual into the younger one. Change the last part of `FigureS5a` with the following **edges** and one **admixture event**, save it as `FigureS5a.v2` and run it again.
 
 
     edge    c24 SA2 SA7
@@ -225,4 +225,4 @@ We can then model a contribution from the oldest Chilean individual into the you
     edge    c32 SA8 Chile_LosRieles_5100BP
 
 In the `.out` file we see that most of the outlier f4-statistics are gone while the worst statistic is still present but reduced (Zscore=3.2). This suggests the presence of un-modelled affinity between the two oldest South American groups `Brazil_LapaDoSanto_9600BP` and `CHIle_LosRieles_10900BP`, that might represent a shared `Anzick-1`-related ancestry that we investigate in detail in Figure 4 and Figure 5 of Posth et al. 2018.
-The resulting admixture graph suggests that a minor component from the oldest Chilean individual contributed at least marginally to the younger individual despited being more than 5,000 years apart!
+The resulting admixture graph suggests that a component from the oldest Chilean individual contributed at least marginally to the younger individual despite being more than 5,000 years apart!
