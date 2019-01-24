@@ -1,3 +1,5 @@
+Slides for this lesson are available :download:`here <./qpGraph_Posth.pdf>`.
+
 Estimating Admixture Graphs with ``qpGraph``
 ============================================
 

@@ -156,6 +156,10 @@ The ``-s`` flag tells MSMC to skip sites with ambiguous phasing. As a rule of th
 Plotting in Python
 ------------------
 
+For plotting in python, we first need to import the `pandas <https://pandas.pydata.org>`__ library via::
+
+    import pandas as pd
+
 The result files from MSMC2 look like this::
 
     time_index	left_time_boundary	right_time_boundary	lambda
