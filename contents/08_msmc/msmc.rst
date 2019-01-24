@@ -22,7 +22,7 @@ We will use the ``masterVar``-files for each of the 6 samples, and use the ``cgC
         MASTERVAR=$(ls $MASTERVARDIR/masterVarBeta-$IND-*.tsv.chr1.bz2)
         OUT_MASK=$OUTDIR/$IND.$CHR.mask.bed.gz
         OUT_VCF=$OUTDIR/$IND.$CHR.vcf.gz
-        ~/msmc-tools/cgCaller.py $CHR $IND $OUT_MASK $MASTERVAR | gzip -c > $OUT_VCF
+        cgCaller.py $CHR $IND $OUT_MASK $MASTERVAR | gzip -c > $OUT_VCF
     done
 
 Here, we restrict analysis only on chromosome 1 (which is called ``chr1`` in the Complete Genomics data sets). Normally, you would also loop over chromosomes 1-22 in this script.
@@ -75,7 +75,7 @@ For generating the input files for MSMC, we will use a script called ``generate_
     INDIR=/path/to/VCF/and/mask/files
     OUTDIR=/path/to/output_files
     MAPDIR=/path/to/mappability/mask
-    ~/msmc-tools/generate_multihetsep.py --chr 1 --mask $INDIR/NA12878.mask.bed.gz \
+    generate_multihetsep.py --chr 1 --mask $INDIR/NA12878.mask.bed.gz \
         --mask $MAPDIR/hs37d5_chr1.mask.bed $INDIR/NA12878.vcf.gz > $OUTDIR/NA12878.chr1.multihetsep.txt
 
 Here we have added the mask and VCF file of the NA12878 sample, and the mappability mask. I suggest you don't actually run this because we won't need this single-sample processing. 

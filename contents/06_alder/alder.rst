@@ -181,9 +181,11 @@ The next block describes the main results of alder: exponential fit of weighted 
     d>0.90     amp_exp:  0.00019129 +/- 0.00001465   z = 13.06 *
     d>0.90     amp_aff:  0.00000416 +/- 0.00000174
 
-This block shows estimates using the above-found minimum distance (0.7 cM), as well as values around it (� 0.2 cM range). The most important number is "decay:", which shows the estimate for admixture date and its block jackknifing standard error. It corresponds to the "n" parameter in the following exponential curve formula::
+This block shows estimates using the above-found minimum distance (0.7 cM), as well as values around it (0.2 cM range). The most important number is "decay:", which shows the estimate for admixture date and its block jackknifing standard error. It corresponds to the "n" parameter in the following exponential curve formula::
 
-    E[Y] = M � e^-nd + K
+.. math::
+
+    E[Y] = M \times e^-nd + K
 
 .. admonition:: Exercise
 
