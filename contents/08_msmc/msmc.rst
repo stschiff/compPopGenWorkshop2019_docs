@@ -1,19 +1,10 @@
 MSMC
 ====
 
-Prerequisites
--------------
-
-We first need to download some python scripts from the msmc-tools_ repository. To do that, go to your home directory and run ``git clone https://github.com/stschiff/msmc-tools``
-
-.. _msmc-tools: https://github.com/stschiff/msmc-tools
-
-You should now have a directory called ``msmc-tools`` in your home-folder, as you can verify by running ``ls``.
-
 Data
 ----
 
-All input data and intermediate files for this tutorial are at ``~/share/MSMC-tutorial-files/``.
+All input data and intermediate files for this tutorial are at ``/data/msmc/``.
 
 For this lesson, we will use two trios from the 69 Genomes dataset by Complete Genomics. You will find the so called "MasterVarBeta" files for six individuals for chromosome 1 in the ``cg_data`` subdirectory in the tutorial files. Some information on the six samples: The first three form a father-mother-child trio from the West-African Yoruba, a people living in Nigeria. Here, NA19240 is the offspring, and NA19238 and NA19239 are the two parents. The second three samples form a father-mother-child trio from Utah (USA), with European ancestry. Here, NA12878 is the offspring, and NA12891 and NA12892 are the parents.
 
