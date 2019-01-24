@@ -183,7 +183,7 @@ Let's first plot the effective population sizes with the following python code::
     plt.gca().set_xscale('log')
     plt.legend()
 
-Obviously, you have to adjust the path to the final result files under ``~/share/MSMC-tutorial-files``. The code produces this plot:
+Obviously, you have to adjust the path to the final result files under ``/data/msmc``. The code produces this plot:
 
 .. image:: popSizes.png
     :width: 300px
@@ -203,7 +203,7 @@ For the cross-population results, we would like to plot the coalescence rate acr
     combineCrossCoal.py $DIR/EUR_AFR.msmc2.final.txt $DIR/EUR.msmc2.final.txt \
         $DIR/AFR.msmc2.final.txt > $DIR/EUR_AFR.combined.msmc2.final.txt
 
-The resulting file (also available under ``~/share/MSMC-tutorial-files`` looks like this::
+The resulting file (also available under ``/data/msmc`` looks like this::
 
     time_index	left_time_boundary	right_time_boundary	lambda_00	lambda_01	lambda_11
     0	1.1893075e-06	4.75723e-06	1284.0425703	2.24322	2650.59574175
