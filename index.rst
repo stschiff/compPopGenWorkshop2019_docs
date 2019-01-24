@@ -6,13 +6,15 @@
 Documentation for the 2019 Workshop on Computational Population Genetics
 ========================================================================
 
-This is the documentation for the Workshop held during January 22-24, 2019 at the `Max-Planck-Institute for the Science of Human History`_ (MPI-SHH) in Jena, organised by `Stephan Schiffels`_ (MPI-SHH), `Choongwon Jeong`_ (MPI-SHH) and `Benjamin Peter`_ (MPI-EVA_) and 
+This is the documentation for the Workshop held during January 22-24, 2019 at the `Max-Planck-Institute for the Science of Human History`_ (MPI-SHH) in Jena, organised by `Stephan Schiffels`_ (MPI-SHH), `Choongwon Jeong`_ (MPI-SHH) and `Benjamin Peter`_ (MPI-EVA_). Important contributions came from `Kay Prüfer`_ and `Cosimo Posth`_!
 
 .. _Max-Planck-Institute for the Science of Human History: https://www.shh.mpg.de
 .. _Stephan Schiffels: https://stephanschiffels.de
 .. _Choongwon Jeong: https://www.shh.mpg.de/person/50880/25522
 .. _Benjamin Peter: https://www.eva.mpg.de/genetics/staff/benjamin-peter/index.html
 .. _MPI-EVA: https://www.eva.mpg.de/german/index.html
+.. _Kay Prüfer: https://www.shh.mpg.de/person/95887/25522
+.. _Cosimo Posth: https://www.shh.mpg.de/person/47597/25522
 
 .. toctree::
    :maxdepth: 2
