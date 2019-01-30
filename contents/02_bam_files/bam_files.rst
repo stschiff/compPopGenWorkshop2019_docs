@@ -71,7 +71,7 @@ Here are some basic shell-commands:
    Run ``samtools view /data/bam/workshop1.bam | cut -f 3``. What does this column of the SAM format mean?
 
 ``tr``
-  This command (for "transpose") will substitute a set of characters by a diffent characters. For instance, ``tr 'ABC' 'abc'`` will substitute all occurrences of A, B or C by a, b and c, respectively.
+  This command (for "transpose") will substitute a set of characters by diffent characters. For instance, ``tr 'ABC' 'abc'`` will substitute all occurrences of A, B or C by a, b and c, respectively. The command can also delete characters. ``tr -d "N"`` will for instance delete all occurrences of "N" from the input. 
 
 ``grep``
   grep will only print lines matching a specific pattern. Example: ``grep AAAACCCC`` will print all lines containing "AAAACCCC". ``grep "^Word"`` will print lines starting with "Word".
