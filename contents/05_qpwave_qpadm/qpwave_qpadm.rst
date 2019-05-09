@@ -106,7 +106,7 @@ You can write two parameter files, using ``left1.pops`` and ``left2.pops`` as th
     done
 
 
-An important optional parameter is ``useallsnps: YES``. In default setting, both programs use only the SNPs that are not missing in any of the left or right populations. Therefore, all f\ :sub:`4` statistics used in the program are calculated across the exactly same set of SNPs. When ``useallsnps: YES`` is set, each f\ :sub:`4` statistic is calculated using SNPs that are present in the four populations included in the test.
+An important optional parameter is ``allsnps: YES``. In default setting, both programs use only the SNPs that are not missing in any of the left or right populations. Therefore, all f\ :sub:`4` statistics used in the program are calculated across the exactly same set of SNPs. When ``allsnps: YES`` is set, each f\ :sub:`4` statistic is calculated using SNPs that are present in the four populations included in the test.
 
 
 Running the programs
